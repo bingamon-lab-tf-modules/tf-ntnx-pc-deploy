@@ -1,4 +1,4 @@
-# MODULE_NAME
+# tf-ntnx-pc-deploy
 
 ## Table of Contents
 
