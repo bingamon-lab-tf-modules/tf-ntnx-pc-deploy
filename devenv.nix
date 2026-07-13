@@ -198,7 +198,13 @@ in
       tflint.enable = true;
       trim-trailing-whitespace.enable = true;
       trufflehog.enable = false;
-      typos.enable = true;
+      cspell = {
+        enable = true;
+        args = [
+          "lint"
+          "--no-must-find-files"
+        ];
+      };
       yamllint = {
         enable = true;
         settings = {
@@ -246,7 +252,6 @@ in
             "skellock.just"
             "streetsidesoftware.code-spell-checker"
             "tamasfe.even-better-toml"
-            "tekumura.typos-vscode"
             "timonwong.shellcheck"
             "tuxtina.json2yaml"
             "vscodevim.vim"
