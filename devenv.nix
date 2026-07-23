@@ -168,7 +168,7 @@ in
         };
       };
       mixed-line-endings.enable = true;
-      nixfmt-rfc-style.enable = true;
+      nixfmt.style.enable = true;
       pre-commit-hook-ensure-sops.enable = true;
       prettier = {
         enable = true;
