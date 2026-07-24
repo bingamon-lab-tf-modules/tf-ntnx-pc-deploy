@@ -64,7 +64,7 @@ let
 
 in
 {
-  name = "tf-template";
+  name = "tf-ntnx-pc-deploy";
 
   env = {
     PROJECT = config.name;
@@ -168,7 +168,7 @@ in
         };
       };
       mixed-line-endings.enable = true;
-      nixfmt-rfc-style.enable = true;
+      nixfmt.enable = true;
       pre-commit-hook-ensure-sops.enable = true;
       prettier = {
         enable = true;
