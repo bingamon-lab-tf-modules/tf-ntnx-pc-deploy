@@ -10,14 +10,14 @@ A description of the module goes here.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10.0 |
 | <a name="requirement_nutanix"></a> [nutanix](#requirement\_nutanix) | >= 2.4.2 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_nutanix"></a> [nutanix](#provider\_nutanix) | 2.4.2 |
 
 ## Modules
@@ -27,7 +27,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [nutanix_pc_deploy_v2.this](https://registry.terraform.io/providers/nutanix/nutanix/latest/docs/resources/pc_deploy_v2) | resource |
 | [nutanix_pc_registration_v2.this](https://registry.terraform.io/providers/nutanix/nutanix/latest/docs/resources/pc_registration_v2) | resource |
 | [nutanix_pc_unregistration_v2.this](https://registry.terraform.io/providers/nutanix/nutanix/latest/docs/resources/pc_unregistration_v2) | resource |
@@ -36,7 +36,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_deploy_timeout"></a> [deploy\_timeout](#input\_deploy\_timeout) | Create timeout for nutanix\_pc\_deploy\_v2. Prism Central deployment is long running. | `string` | `"120m"` | no |
 | <a name="input_enable_unregistration"></a> [enable\_unregistration](#input\_enable\_unregistration) | When true, also create nutanix\_pc\_unregistration\_v2 resources so PE clusters are unregistered on destroy. | `bool` | `false` | no |
 | <a name="input_network"></a> [network](#input\_network) | Network configuration for the Prism Central VM (maps to the network block of nutanix\_pc\_deploy\_v2). | <pre>object({<br/>    # Static external (VIP) address for Prism Central. Optional; when null the<br/>    # address is allocated from the external network IP range instead.<br/>    external_address = optional(string, null)<br/><br/>    # DNS and NTP servers. Values may be IPv4 addresses or FQDNs; the module<br/>    # picks the correct provider block type automatically. At least one of each<br/>    # is required by the provider.<br/>    name_servers = optional(list(string), ["8.8.8.8"])<br/>    ntp_servers  = optional(list(string), ["0.pool.ntp.org"])<br/><br/>    # The external (management) network the Prism Central VM attaches to.<br/>    external_network = object({<br/>      # Supply EITHER an explicit subnet ext_id OR a subnet name to look up.<br/>      network_ext_id = optional(string, null)<br/>      network_name   = optional(string, null)<br/><br/>      default_gateway = string # IPv4 gateway address, e.g. "10.0.0.1".<br/>      subnet_mask     = string # IPv4 subnet mask, e.g. "255.255.255.0".<br/><br/>      # Range the Prism Central VM address(es) are drawn from.<br/>      ip_range = object({<br/>        begin = string # First usable IPv4 address in the range.<br/>        end   = string # Last usable IPv4 address in the range.<br/>      })<br/>    })<br/>  })</pre> | n/a | yes |
@@ -46,7 +46,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_deploy_task_status"></a> [deploy\_task\_status](#output\_deploy\_task\_status) | Status reference for the Prism Central deployment task. |
 | <a name="output_outputs"></a> [outputs](#output\_outputs) | Aggregate of all module outputs. |
 | <a name="output_pc_deploy_summary"></a> [pc\_deploy\_summary](#output\_pc\_deploy\_summary) | Human-readable summary of the requested Prism Central deployment (known at plan time). |
