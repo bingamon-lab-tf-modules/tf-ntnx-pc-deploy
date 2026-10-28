@@ -40,6 +40,7 @@ mock_provider "nutanix" {
           ip_prefix                        = ""
           ip_usage                         = []
           is_advanced_networking           = false
+          is_connected                     = false
           is_external                      = false
           is_nat_enabled                   = false
           links                            = []
@@ -47,7 +48,9 @@ mock_provider "nutanix" {
           migration_state                  = ""
           network_function_chain_reference = ""
           network_id                       = 0
+          project_ext_id                   = ""
           reserved_ip_addresses            = []
+          shared_with_projects             = []
           subnet_type                      = ""
           virtual_switch                   = []
           virtual_switch_reference         = ""
