@@ -100,3 +100,8 @@ waderyan
 wakatime
 yzhang
 prek
+SecretSpec
+mktemp
+bingamon
+esac
+secops
