@@ -308,3 +308,61 @@ run "high_availability_deploy" {
     error_message = "Expected high availability to be enabled"
   }
 }
+
+# Test 12: Deployment with write-only PC admin credentials, static VIP,
+# resource sizing overrides, and remote PE registration plans cleanly.
+run "deploy_with_credentials_and_resource_config" {
+  command = plan
+
+  variables {
+    prism_central = {
+      name                        = "pc-lab-custom"
+      size                        = "SMALL"
+      version                     = "pc.2024.3"
+      should_enable_lockdown_mode = true
+      credentials = {
+        username = "admin"
+        password = "MockAdminPassword123!"
+      }
+      resource_config = {
+        num_vcpus            = 8
+        memory_size_bytes    = 34359738368
+        data_disk_size_bytes = 536870912000
+        container_ext_ids    = ["33333333-3333-3333-3333-333333333333"]
+      }
+    }
+
+    network = {
+      external_address = "10.0.0.40"
+      name_servers     = ["8.8.8.8"]
+      ntp_servers      = ["0.pool.ntp.org"]
+      external_network = {
+        network_ext_id  = "11111111-1111-1111-1111-111111111111"
+        default_gateway = "10.0.0.1"
+        subnet_mask     = "255.255.255.0"
+        ip_range = {
+          begin = "10.0.0.50"
+          end   = "10.0.0.60"
+        }
+      }
+    }
+
+    prism_element = {
+      pe1 = {
+        remote_address = "10.0.0.9"
+        username       = "admin"
+        password       = "MockPePassword123!"
+      }
+    }
+  }
+
+  assert {
+    condition     = output.pc_vip == "10.0.0.40" && output.pc_deploy_summary.lockdown_mode == true
+    error_message = "Expected static VIP 10.0.0.40 and lockdown mode enabled"
+  }
+
+  assert {
+    condition     = contains(keys(output.registration_status), "pe1")
+    error_message = "Expected registration_status to contain pe1 without write-only sensitivity errors"
+  }
+}
